@@ -2,6 +2,8 @@ writeCode
 
 Create a user resource
 
+
+
 1. generate User model
 2. add a POST request on "/users" in user router to handle form data.
 3. Send user information from html form which can be requested by doing GET request on "/users/new"
