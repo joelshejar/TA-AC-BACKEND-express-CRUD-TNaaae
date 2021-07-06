@@ -4,7 +4,11 @@ var User = require('../models/User')
 
 router.get('/', (req,res)=>{
     // handle action
-    res.render('users.ejs')
+    User.find({}, (err,users)=>{
+        if(err) return next(err)
+        res.render('users.ejs', {users:users})
+    })
+    
 })
 
 router.get('/new',(req,res)=>{
@@ -20,8 +24,13 @@ router.post('/',(req,res)=>{
     })
 })
 
-router.get('/:id', (req,res)=>{
+router.get('/:id', (req,res,next)=>{
     // single user detail
+    var id = req.params.id
+    Users.findbyId(id, (err,user)=>{
+        if(err) return next(err)
+        res.render('singleUser.ejs', { user })
+    })
 })
 
 router.get('/:id/edit', (req,res)=>{

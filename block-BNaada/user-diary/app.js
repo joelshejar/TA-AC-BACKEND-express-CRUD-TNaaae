@@ -20,6 +20,18 @@ app.use(express.urlencoded({extended: false}))
 app.get('/', (req,res) => {
     res.render('index.ejs')
 })
+app.use('/users', usersRouter)
+
+// handle error
+
+app.use((req,res,next)=>{
+    res.status(404).send('Page Not found')
+})
+// custom error handler
+
+app.use((err,req,res,next)=>{
+    res.send(err)
+})
 app.listen(3000,()=>{
     console.log('listening to port 3000')
 })
